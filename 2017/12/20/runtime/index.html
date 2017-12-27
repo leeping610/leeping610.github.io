@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.2 -->
+    <script>
+        window.materialVersion = "1.5.2"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            Runtime学习总结 | 
+        
+        leeping&#39;s blogs
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="iOS,Objective-C,objc,runtime,runloop,opencv,sign,shell,重签名,教程,程序,代码">
+    <meta name="keywords" content=",iOS,Objective-C,runtime,msg_forward">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?MKetZV3cUTfDxvMffaOezg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(/img/bg.jpg);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="leeping&#39;s blogs">
+    <meta name="msapplication-starturl" content="http://blog.leeping.me/2017/12/20/runtime/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="leeping&#39;s blogs">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://blog.leeping.me/2017/12/20/runtime/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Runtime学习总结 | leeping&#39;s blogs">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="iOS,Objective-C,objc,runtime,runloop,opencv,sign,shell,重签名,教程,程序,代码">
+    <meta property="og:article:tag" content="iOS,Objective-C,runtime,msg_forward"> 
+
+    
+        <meta property="article:published_time" content="Wed Dec 20 2017 21:28:41 GMT+0800">
+        <meta property="article:modified_time" content="Wed Dec 27 2017 21:32:51 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://blog.leeping.me/2017/12/20/runtime/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://blog.leeping.me/2017/12/20/runtime/index.html",
+    "headline": "Runtime学习总结",
+    "datePublished": "Wed Dec 20 2017 21:28:41 GMT+0800",
+    "dateModified": "Wed Dec 27 2017 21:32:51 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "leeping",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.jpg"
+        },
+        "description": "Hello World!,I am a developer from China.,Thanks for coming."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "leeping&#39;s blogs",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",iOS,Objective-C,runtime,msg_forward",
+    "description": "iOS,Objective-C,objc,runtime,runloop,opencv,sign,shell,重签名,教程,程序,代码",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概览"><span class="post-toc-number">1.</span> <span class="post-toc-text">概览</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#运行时-runtime"><span class="post-toc-number">2.</span> <span class="post-toc-text">运行时(runtime)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#消息转发-message-forward"><span class="post-toc-number">3.</span> <span class="post-toc-text">消息转发(message_forward)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Method-Swizzling"><span class="post-toc-number">4.</span> <span class="post-toc-text">Method Swizzling</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Safe"><span class="post-toc-number">5.</span> <span class="post-toc-text">Safe</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-NSNull"><span class="post-toc-number">5.0.1.</span> <span class="post-toc-text">1.NSNull</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-NSArray-NSMutableArray"><span class="post-toc-number">5.0.2.</span> <span class="post-toc-text">2.NSArray/NSMutableArray</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-NSDictionary-NSMutableDictionary"><span class="post-toc-number">5.0.3.</span> <span class="post-toc-text">3.NSDictionary/NSMutableDictionary</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-NSSet-NSMutableSet"><span class="post-toc-number">5.0.4.</span> <span class="post-toc-text">4.NSSet/NSMutableSet</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-NSString-NSMutableString"><span class="post-toc-number">5.0.5.</span> <span class="post-toc-text">5.NSString/NSMutableString</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Json-gt-model（自动归档）"><span class="post-toc-number">6.</span> <span class="post-toc-text">Json-&gt;model（自动归档）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对象关联"><span class="post-toc-number">7.</span> <span class="post-toc-text">对象关联</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多delegate化"><span class="post-toc-number">8.</span> <span class="post-toc-text">多delegate化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#去BaseClass化"><span class="post-toc-number">9.</span> <span class="post-toc-text">去BaseClass化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打点"><span class="post-toc-number">10.</span> <span class="post-toc-text">打点</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Runtime学习总结
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.jpg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>leeping</strong>
+        <span>12月 20, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/iOS-Objective-C-runtime-msg-forward/">iOS,Objective-C,runtime,msg_forward</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Runtime学习总结&url=http://blog.leeping.me/2017/12/20/runtime/index.html&pic=http://blog.leeping.me/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Runtime学习总结&url=http://blog.leeping.me/2017/12/20/runtime/index.html&via=leeping" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.leeping.me/2017/12/20/runtime/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><blockquote>
+<p>The Objective-C runtime is a runtime library that provides support for the dynamic properties of the Objective-C language, and as such is linked to by all Objective-C apps. Objective-C runtime library support functions are implemented in the shared library found at /usr/lib/libobjc.A.dylib.</p>
+</blockquote>
+<p><code>Apple所描述的runtime是一个为Objective-C提供运行时属性的库。</code></p>
+<h2 id="运行时-runtime"><a href="#运行时-runtime" class="headerlink" title="运行时(runtime)"></a>运行时(runtime)</h2><blockquote>
+<p>运行时rumtime就是程序运行的时候。<br>运行时库就是程序运行的时候所需要依赖的库。<br>运行的时候指的是指令加载到内存并由CPU执行的时候。</p>
+</blockquote>
+<h2 id="消息转发-message-forward"><a href="#消息转发-message-forward" class="headerlink" title="消息转发(message_forward)"></a>消息转发(message_forward)</h2><p>消息转发第一步会调用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ (BOOL)resolveInstanceMethod:(SEL)sel</span><br></pre></td></tr></table></figure>
+<p>允许此时给Class动态添加实现，如果有实现了，调用返回；如果仍没有实现，就继续调用下面这个方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- (id)forwardingTargetForSelector</span><br></pre></td></tr></table></figure>
+<p>允许返回一这个能响应该消息的对象，如果获取到了，向新对象转发消息；返回nil的话，则继续的方法获取一个方法签名</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector</span><br></pre></td></tr></table></figure>
+<p>如果获取不到，就直接调用doesNotRecognizeSeletor:抛出异常；获取到了方法签名就继续调用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- (void)forwardInvocation:(NSInvocation *)anInvocation</span><br></pre></td></tr></table></figure>
+<p>上面获取到的方法签名包装成Invocation传入，如何处理就在这里面了。</p>
+<h2 id="Method-Swizzling"><a href="#Method-Swizzling" class="headerlink" title="Method Swizzling"></a>Method Swizzling</h2><p>Objective-C中的AOP，就是利用了runtime的特质。</p>
+<p>主要用到了runtime中以下几个方法。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 获取 MetaClass</span><br><span class="line">objc_getMetaClass(const char * name)</span><br><span class="line">// 获取方法 Method</span><br><span class="line">class_getInstanceMethod(Class cls, SEL name)</span><br><span class="line">// 添加方法</span><br><span class="line">class_addMethod(Class cls, SEL name, IMP imp, const char * types)</span><br><span class="line">// 替换方法</span><br><span class="line">class_replaceMethod(Class cls, SEL name, IMP imp, const char * types)</span><br><span class="line">// 交换方法</span><br><span class="line">method_exchangeImplementations(Method m1, Method m2)</span><br></pre></td></tr></table></figure>
+<h2 id="Safe"><a href="#Safe" class="headerlink" title="Safe"></a>Safe</h2><blockquote>
+<p>现在大部分利用runtime做crash safe都是直接swizzling原方法。这么做的有一定的几率会出现莫名的bug，原因是一些系统库并不一定都是正常的引用NSArray、NSDictionary、NSString等</p>
+</blockquote>
+<h4 id="1-NSNull"><a href="#1-NSNull" class="headerlink" title="1.NSNull"></a>1.NSNull</h4><blockquote>
+<p>Java会将空字符串在json中用null来表示，所以有的时候会在模型类中出现某些NSString或者其他类变成NSNull的情况，这时候如果没有判断是否为NSNull就调用NSString等其他类的方法，就会抛出doesNotRecognizeSeletor:异常了，出现App crash。</p>
+</blockquote>
+<p>根据消息转发机制，可以利用forwardingTargetForSelector:来做安全。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- (id)forwardingTargetForSelector:(SEL)aSelector &#123;</span><br><span class="line">    </span><br><span class="line">    for (id null in @[@[],@&#123;&#125;,@&quot;&quot;,@0]) &#123;</span><br><span class="line">        if ([null respondsToSelector:aSelector]) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-NSArray-NSMutableArray"><a href="#2-NSArray-NSMutableArray" class="headerlink" title="2.NSArray/NSMutableArray"></a>2.NSArray/NSMutableArray</h4><blockquote>
+<p>NSArray/NSMutableArray的话，就是喜闻乐见的数组越界，传空指针等导致的carsh了，现在主流做法就是直接swizzling掉addObject:(id)object，objectAtIndex:(NSUInteger)index等方法，这边也会介绍下另一种安全方法</p>
+</blockquote>
+<p>直接swizzling常用方法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@implementation NSArray (Safe)</span><br><span class="line"></span><br><span class="line">+ (void)load &#123;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        /* 类方法不用在NSMutableArray里再swizz一次 */</span><br><span class="line">        [NSArray swizzleClassMethod:@selector(arrayWithObject:) withMethod:@selector(hookArrayWithObject:)];</span><br><span class="line">        [NSArray swizzleClassMethod:@selector(arrayWithObjects:count:) withMethod:@selector(hookArrayWithObjects:count:)];</span><br><span class="line">        </span><br><span class="line">        /* 数组有内容obj类型才是__NSArrayI */</span><br><span class="line">        NSArray* obj = [[NSArray alloc] initWithObjects:@0, @1, nil];</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(objectAtIndex:) withMethod:@selector(hookObjectAtIndex:)];</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(subarrayWithRange:) withMethod:@selector(hookSubarrayWithRange:)];</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(objectAtIndexedSubscript:) withMethod:@selector(hookObjectAtIndexedSubscript:)];</span><br><span class="line">        [obj release];</span><br><span class="line">        </span><br><span class="line">        /* iOS10 以上，单个内容类型是__NSArraySingleObjectI */</span><br><span class="line">        if ([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= 10.0)&#123;</span><br><span class="line">            obj = [[NSArray alloc] initWithObjects:@0, nil];</span><br><span class="line">            [obj swizzleInstanceMethod:@selector(objectAtIndex:) withMethod:@selector(hookObjectAtIndex:)];</span><br><span class="line">            [obj swizzleInstanceMethod:@selector(subarrayWithRange:) withMethod:@selector(hookSubarrayWithRange:)];</span><br><span class="line">            [obj swizzleInstanceMethod:@selector(objectAtIndexedSubscript:) withMethod:@selector(hookObjectAtIndexedSubscript:)];</span><br><span class="line">            [obj release];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        /* iOS9 以上，没内容类型是__NSArray0 */</span><br><span class="line">        if ([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= 9.0)&#123;</span><br><span class="line">            obj = [[NSArray alloc] init];</span><br><span class="line">            [obj swizzleInstanceMethod:@selector(objectAtIndex:) withMethod:@selector(hookObjectAtIndex0:)];</span><br><span class="line">            [obj swizzleInstanceMethod:@selector(subarrayWithRange:) withMethod:@selector(hookSubarrayWithRange:)];</span><br><span class="line">            [obj swizzleInstanceMethod:@selector(objectAtIndexedSubscript:) withMethod:@selector(hookObjectAtIndexedSubscript:)];</span><br><span class="line">            [obj release];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (instancetype)hookArrayWithObject:(id)anObject &#123;</span><br><span class="line">    if (anObject) &#123;</span><br><span class="line">        return [self hookArrayWithObject:anObject];</span><br><span class="line">    &#125;</span><br><span class="line">    SFAssert(NO, @&quot;NSArray invalid args hookArrayWithObject:[%@]&quot;, anObject);</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* __NSArray0 没有元素，也不可以变 */</span><br><span class="line">- (id)hookObjectAtIndex0:(NSUInteger)index &#123;</span><br><span class="line">    SFAssert(NO, @&quot;NSArray invalid index:[%@]&quot;, @(index));</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)hookObjectAtIndex:(NSUInteger)index &#123;</span><br><span class="line">    if (index &lt; self.count) &#123;</span><br><span class="line">        return [self hookObjectAtIndex:index];</span><br><span class="line">    &#125;</span><br><span class="line">    SFAssert(NO, @&quot;NSArray invalid index:[%@]&quot;, @(index));</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id) hookObjectAtIndexedSubscript:(NSInteger)index &#123;</span><br><span class="line">    if (index &lt; self.count) &#123;</span><br><span class="line">        return [self hookObjectAtIndexedSubscript:index];</span><br><span class="line">    &#125;</span><br><span class="line">    SFAssert(NO, @&quot;NSArray invalid index:[%@]&quot;, @(index));</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSArray *)hookSubarrayWithRange:(NSRange)range &#123;</span><br><span class="line">    if (range.location + range.length &lt;= self.count)&#123;</span><br><span class="line">        return [self hookSubarrayWithRange:range];</span><br><span class="line">    &#125;else if (range.location &lt; self.count)&#123;</span><br><span class="line">        return [self hookSubarrayWithRange:NSMakeRange(range.location, self.count-range.location)];</span><br><span class="line">    &#125;</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (instancetype)hookArrayWithObjects:(const id [])objects count:(NSUInteger)cnt &#123;</span><br><span class="line">    NSInteger index = 0;</span><br><span class="line">    id objs[cnt];</span><br><span class="line">    for (NSInteger i = 0; i &lt; cnt ; ++i) &#123;</span><br><span class="line">        if (objects[i]) &#123;</span><br><span class="line">            objs[index++] = objects[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return [self hookArrayWithObjects:objs count:index];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation NSMutableArray(Safe)</span><br><span class="line"></span><br><span class="line">+ (void)load &#123;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        NSMutableArray* obj = [[NSMutableArray alloc] init];</span><br><span class="line">        //对象方法 __NSArrayM 和 __NSArrayI 都有实现，都要swizz</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(objectAtIndex:) withMethod:@selector(hookObjectAtIndex:)];</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(objectAtIndexedSubscript:) withMethod:@selector(hookObjectAtIndexedSubscript:)];</span><br><span class="line">        </span><br><span class="line">        [obj swizzleInstanceMethod:@selector(addObject:) withMethod:@selector(hookAddObject:)];</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(insertObject:atIndex:) withMethod:@selector(hookInsertObject:atIndex:)];</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(removeObjectAtIndex:) withMethod:@selector(hookRemoveObjectAtIndex:)];</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(replaceObjectAtIndex:withObject:) withMethod:@selector(hookReplaceObjectAtIndex:withObject:)];</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(removeObjectsInRange:) withMethod:@selector(hookRemoveObjectsInRange:)];</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(subarrayWithRange:) withMethod:@selector(hookSubarrayWithRange:)];</span><br><span class="line">        </span><br><span class="line">        [obj release];</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)hookAddObject:(id)anObject &#123;</span><br><span class="line">    if (anObject) &#123;</span><br><span class="line">        [self hookAddObject:anObject];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        SFAssert(NO, @&quot;NSMutableArray invalid args hookAddObject:[%@]&quot;, anObject);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)hookObjectAtIndex:(NSUInteger)index &#123;</span><br><span class="line">    if (index &lt; self.count) &#123;</span><br><span class="line">        return [self hookObjectAtIndex:index];</span><br><span class="line">    &#125;</span><br><span class="line">    SFAssert(NO, @&quot;NSArray invalid index:[%@]&quot;, @(index));</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br><span class="line">- (id)hookObjectAtIndexedSubscript:(NSInteger)index &#123;</span><br><span class="line">    if (index &lt; self.count) &#123;</span><br><span class="line">        return [self hookObjectAtIndexedSubscript:index];</span><br><span class="line">    &#125;</span><br><span class="line">    SFAssert(NO, @&quot;NSArray invalid index:[%@]&quot;, @(index));</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)hookInsertObject:(id)anObject atIndex:(NSUInteger)index &#123;</span><br><span class="line">    if (anObject &amp;&amp; index &lt;= self.count) &#123;</span><br><span class="line">        [self hookInsertObject:anObject atIndex:index];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        if (!anObject) &#123;</span><br><span class="line">            SFAssert(NO, @&quot;NSMutableArray invalid args hookInsertObject:[%@] atIndex:[%@]&quot;, anObject, @(index));</span><br><span class="line">        &#125;</span><br><span class="line">        if (index &gt; self.count) &#123;</span><br><span class="line">            SFAssert(NO, @&quot;NSMutableArray hookInsertObject[%@] atIndex:[%@] out of bound:[%@]&quot;, anObject, @(index), @(self.count));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)hookRemoveObjectAtIndex:(NSUInteger)index &#123;</span><br><span class="line">    if (index &lt; self.count) &#123;</span><br><span class="line">        [self hookRemoveObjectAtIndex:index];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        SFAssert(NO, @&quot;NSMutableArray hookRemoveObjectAtIndex:[%@] out of bound:[%@]&quot;, @(index), @(self.count));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)hookReplaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject &#123;</span><br><span class="line">    if (index &lt; self.count &amp;&amp; anObject) &#123;</span><br><span class="line">        [self hookReplaceObjectAtIndex:index withObject:anObject];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        if (!anObject) &#123;</span><br><span class="line">            SFAssert(NO, @&quot;NSMutableArray invalid args hookReplaceObjectAtIndex:[%@] withObject:[%@]&quot;, @(index), anObject);</span><br><span class="line">        &#125;</span><br><span class="line">        if (index &gt;= self.count) &#123;</span><br><span class="line">            SFAssert(NO, @&quot;NSMutableArray hookReplaceObjectAtIndex:[%@] withObject:[%@] out of bound:[%@]&quot;, @(index), anObject, @(self.count));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)hookRemoveObjectsInRange:(NSRange)range &#123;</span><br><span class="line">    if (range.location + range.length &lt;= self.count) &#123;</span><br><span class="line">        [self hookRemoveObjectsInRange:range];</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        SFAssert(NO, @&quot;NSMutableArray invalid args hookRemoveObjectsInRange:[%@]&quot;, NSStringFromRange(range));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSArray *)hookSubarrayWithRange:(NSRange)range &#123;</span><br><span class="line">    if (range.location + range.length &lt;= self.count)&#123;</span><br><span class="line">        return [self hookSubarrayWithRange:range];</span><br><span class="line">    &#125;else if (range.location &lt; self.count)&#123;</span><br><span class="line">        return [self hookSubarrayWithRange:NSMakeRange(range.location, self.count-range.location)];</span><br><span class="line">    &#125;</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>利用消息转发</p>
+<blockquote>
+<p>待续</p>
+</blockquote>
+<h4 id="3-NSDictionary-NSMutableDictionary"><a href="#3-NSDictionary-NSMutableDictionary" class="headerlink" title="3.NSDictionary/NSMutableDictionary"></a>3.NSDictionary/NSMutableDictionary</h4><blockquote>
+<p>NSDictionary/NSMutableDictionary比较常见的是传空指针导致的crash</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@implementation NSDictionary (Safe)</span><br><span class="line"></span><br><span class="line">+ (void)load &#123;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        /* 类方法 */</span><br><span class="line">        [NSDictionary swizzleClassMethod:@selector(dictionaryWithObject:forKey:) withMethod:@selector(hookDictionaryWithObject:forKey:)];</span><br><span class="line">        [NSDictionary swizzleClassMethod:@selector(dictionaryWithObjects:forKeys:count:) withMethod:@selector(hookDictionaryWithObjects:forKeys:count:)];</span><br><span class="line">        </span><br><span class="line">        /* 数组有内容obj类型才是__NSDictionaryI */</span><br><span class="line">        NSDictionary* obj = [[NSDictionary alloc] initWithObjectsAndKeys:@0, @0, @0, @0, nil];</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(objectForKey:) withMethod:@selector(hookObjectForKey:)];</span><br><span class="line">        [obj release];</span><br><span class="line">        </span><br><span class="line">        /* iOS10 以上，单个内容类型是__NSArraySingleEntryDictionaryI */</span><br><span class="line">        if ([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= 10.0)&#123;</span><br><span class="line">            obj = [[NSDictionary alloc] initWithObjectsAndKeys:@0, @0, nil];</span><br><span class="line">            [obj swizzleInstanceMethod:@selector(objectForKey:) withMethod:@selector(hookObjectForKey:)];</span><br><span class="line">            [obj release];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        /* iOS9 以上，没内容类型是__NSDictionary0 */</span><br><span class="line">        if ([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= 9.0)&#123;</span><br><span class="line">            obj = [[NSDictionary alloc] init];</span><br><span class="line">            [obj swizzleInstanceMethod:@selector(objectForKey:) withMethod:@selector(hookObjectForKey:)];</span><br><span class="line">            [obj release];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (instancetype)hookDictionaryWithObject:(id)object forKey:(id)key &#123;</span><br><span class="line">    if (object &amp;&amp; key) &#123;</span><br><span class="line">        return [self hookDictionaryWithObject:object forKey:key];</span><br><span class="line">    &#125;</span><br><span class="line">    SFAssert(NO, @&quot;NSDictionary invalid args hookDictionaryWithObject:[%@] forKey:[%@]&quot;, object, key);</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (instancetype)hookDictionaryWithObjects:(const id [])objects forKeys:(const id [])keys count:(NSUInteger)cnt &#123;</span><br><span class="line">    NSInteger index = 0;</span><br><span class="line">    id ks[cnt];</span><br><span class="line">    id objs[cnt];</span><br><span class="line">    for (NSInteger i = 0; i &lt; cnt ; ++i) &#123;</span><br><span class="line">        if (keys[i] &amp;&amp; objects[i]) &#123;</span><br><span class="line">            ks[index] = keys[i];</span><br><span class="line">            objs[index] = objects[i];</span><br><span class="line">            ++index;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            SFAssert(NO, @&quot;NSDictionary invalid args hookDictionaryWithObject:[%@] forKey:[%@]&quot;, objects[i], keys[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return [self hookDictionaryWithObjects:objs forKeys:ks count:index];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)hookObjectForKey:(id)aKey</span><br><span class="line">&#123;</span><br><span class="line">    if (aKey)&#123;</span><br><span class="line">        return [self hookObjectForKey:aKey];</span><br><span class="line">    &#125;</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation NSMutableDictionary (Safe)</span><br><span class="line"></span><br><span class="line">+ (void)load &#123;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        NSMutableDictionary* obj = [[NSMutableDictionary alloc] init];</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(objectForKey:) withMethod:@selector(hookObjectForKey:)];</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(setObject:forKey:) withMethod:@selector(hookSetObject:forKey:)];</span><br><span class="line">        [obj swizzleInstanceMethod:@selector(removeObjectForKey:) withMethod:@selector(hookRemoveObjectForKey:)];</span><br><span class="line">        [obj release];</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">- (id)hookObjectForKey:(id)aKey</span><br><span class="line">&#123;</span><br><span class="line">    if (aKey)&#123;</span><br><span class="line">        return [self hookObjectForKey:aKey];</span><br><span class="line">    &#125;</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br><span class="line">- (void)hookSetObject:(id)anObject forKey:(id)aKey &#123;</span><br><span class="line">    if (anObject &amp;&amp; aKey) &#123;</span><br><span class="line">        [self hookSetObject:anObject forKey:aKey];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        SFAssert(NO, @&quot;NSMutableDictionary invalid args hookSetObject:[%@] forKey:[%@]&quot;, anObject, aKey);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)hookRemoveObjectForKey:(id)aKey &#123;</span><br><span class="line">    if (aKey) &#123;</span><br><span class="line">        [self hookRemoveObjectForKey:aKey];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        SFAssert(NO, @&quot;NSMutableDictionary invalid args hookRemoveObjectForKey:[%@]&quot;, aKey);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h4 id="4-NSSet-NSMutableSet"><a href="#4-NSSet-NSMutableSet" class="headerlink" title="4.NSSet/NSMutableSet"></a>4.NSSet/NSMutableSet</h4><blockquote>
+<p>待续</p>
+</blockquote>
+<h4 id="5-NSString-NSMutableString"><a href="#5-NSString-NSMutableString" class="headerlink" title="5.NSString/NSMutableString"></a>5.NSString/NSMutableString</h4><blockquote>
+<p>待续</p>
+</blockquote>
+<h2 id="Json-gt-model（自动归档）"><a href="#Json-gt-model（自动归档）" class="headerlink" title="Json-&gt;model（自动归档）"></a>Json-&gt;model（自动归档）</h2><p>比较优秀的第三方开源库有YYModel，MJExtension等。</p>
+<h2 id="对象关联"><a href="#对象关联" class="headerlink" title="对象关联"></a>对象关联</h2><p>多用于category，用于绑定对象等。</p>
+<ul>
+<li>绑定对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">objc_setAssociatedObject(id object, const void * key,</span><br><span class="line">                         id value, objc_AssociationPolicy policy)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取绑定的对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">objc_getAssociatedObject(id object, const void * key)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除绑定</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">objc_removeAssociatedObjects(id object)</span><br></pre></td></tr></table></figure>
+<h2 id="多delegate化"><a href="#多delegate化" class="headerlink" title="多delegate化"></a>多delegate化</h2><blockquote>
+<p>待续</p>
+</blockquote>
+<h2 id="去BaseClass化"><a href="#去BaseClass化" class="headerlink" title="去BaseClass化"></a>去BaseClass化</h2><blockquote>
+<p>待续</p>
+</blockquote>
+<h2 id="打点"><a href="#打点" class="headerlink" title="打点"></a>打点</h2><blockquote>
+<p>待续</p>
+</blockquote>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/12/24/resign/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/12/18/opencv/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.jpg" alt="leeping's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        liping_000@126.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">十二月 2017<span class="sidebar_archives-count">4</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/zack_0610" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/chinaappletrees" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/leepingapple" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>leeping's blogs
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?V/53wGualMuiPM3xoetD5Q==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.2 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
