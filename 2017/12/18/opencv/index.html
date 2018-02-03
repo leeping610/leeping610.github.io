@@ -239,7 +239,7 @@
 
     
         <meta property="article:published_time" content="Mon Dec 18 2017 00:00:00 GMT+0800">
-        <meta property="article:modified_time" content="Wed Dec 27 2017 21:33:34 GMT+0800">
+        <meta property="article:modified_time" content="Sat Feb 03 2018 11:14:43 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -262,7 +262,7 @@
     "mainEntityOfPage": "http://blog.leeping.me/2017/12/18/opencv/index.html",
     "headline": "iOS遇上OpenCV part 1",
     "datePublished": "Mon Dec 18 2017 00:00:00 GMT+0800",
-    "dateModified": "Wed Dec 27 2017 21:33:34 GMT+0800",
+    "dateModified": "Sat Feb 03 2018 11:14:43 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "leeping",
@@ -563,10 +563,10 @@
 </code></pre>
 <ul>
 <li>参数1:原始Mat</li>
-<li>参数2:结果Mat</li>
-<li>参数3:</li>
-<li>参数4:</li>
-<li>参数5:</li>
+<li>参数2:输出Mat</li>
+<li>参数3:均值滤波器模板大小</li>
+<li>参数4:sigmaX</li>
+<li>参数5:sigmaY</li>
 </ul>
 <h4 id="2-Sobel算子"><a href="#2-Sobel算子" class="headerlink" title="2.Sobel算子"></a>2.Sobel算子</h4><p>索贝尔算子（Sobel operator）是图像处理中的算子之一，主要用作边缘检测。在技术上，它是一离散性差分算子，用来运算图像亮度函数的梯度之近似值。在图像的任何一点使用此算子，将会产生对应的梯度矢量或是其法矢量。</p>
 <pre><code class="Objective-C">cv::Mat grad_x, grad_y;
@@ -577,7 +577,26 @@ Sobel(resultMat, grad_y, CV_16S, 0, 1 );
 convertScaleAbs(grad_y, abs_grad_y );
 addWeighted(abs_grad_x, 0.6, abs_grad_y, 0.6, 0, resultMat );
 </code></pre>
-<h4 id="3-Canny算子"><a href="#3-Canny算子" class="headerlink" title="3.Canny算子"></a>3.Canny算子</h4><h4 id="4-锐化"><a href="#4-锐化" class="headerlink" title="4.锐化"></a>4.锐化</h4>
+<h4 id="3-Canny算子"><a href="#3-Canny算子" class="headerlink" title="3.Canny算子"></a>3.Canny算子</h4><p>Canny算子，主要用于寻找物体边缘以及边缘检测，<a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/imgtrans/canny_detector/canny_detector.html" target="_blank" rel="noopener">这里</a>有较为详细的文档。</p>
+<pre><code class="Objective-C">cv::Canny(resultMat, resultMat, 0, 35);
+</code></pre>
+<ul>
+<li>参数1:原始输入Mat</li>
+<li>参数2:结果输出Mat</li>
+<li>trackbar设定的值</li>
+<li>设定为低阈值的3倍 (根据Canny算法的推荐)</li>
+</ul>
+<h4 id="4-锐化"><a href="#4-锐化" class="headerlink" title="4.锐化"></a>4.锐化</h4><p>顾名思义，快速聚焦模糊的边缘，提高图片中的清晰度或者焦距程度。</p>
+<pre><code class="Objective-C">double sigma = 5;
+int threshold = 0;
+float amount = 2;
+cv::Mat sharpenMat;
+cv::GaussianBlur(srcMat, sharpenMat, cv::Size(0, 0), sigma, sigma);
+cv::MatExpr lowcontrastmask = abs(srcMat - sharpenMat) &lt; threshold;
+cv::Mat imgdst = srcMat * (1 + amount) + sharpenMat * (-amount);
+srcMat.copyTo(imgdst, lowcontrastmask);
+</code></pre>
+
         
     
 
